@@ -1,0 +1,18 @@
+.table-striped{
+    font-size: 10px!important;
+}
+
+th, td {
+    max-width: fit-content!important;
+    text-align: center!important;
+    min-width: fit-content!important;
+}
+
+th {
+    text-transform: uppercase!important;
+}
+
+.action{
+    font-size:12px;
+    min-width: 60px!important;
+}

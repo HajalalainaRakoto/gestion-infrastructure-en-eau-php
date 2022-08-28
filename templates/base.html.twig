@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" type="image/ico" href="/img/shortcut-icon.png">
+            <link rel="stylesheet" href="/css/bootstrap.min.css">
+            <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+            <link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+            <link rel="stylesheet" href="/css/style.css">
+            {% block style %}{% endblock %}
+            <script src="/js/chart.min.js"></script>
+            <title>{% block title %}Home{% endblock %} - G infra</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="sidebar pr-3 pl-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-center active titre" href="/liste-infra">
+                        <i class="fa fa-tint mr-1 icon"></i>
+                        <span>G-infra</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 border-top border-bottom py-2" id="accordionSidebar">
+                    <a class="nav-link" href="/chart">
+                        <i class="fa fa-tachometer-alt mr-1"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item my-2 border-bottom py-2">
+                    <a class="nav-link" disabled>
+                        <i class="fa fa-table mr-1 text-success"></i>
+                        <span>Listes</span>
+                    </a>
+                    <ul class="nav ml-4 flex-column">
+                        <li class="nav-item my-1"><a href="/liste-localite">Localite</a></li>
+                        <li class="nav-item my-1"><a href="/liste-point-eau">Point d'eau</a></li>
+                        <li class="nav-item my-1"><a href="/liste-systeme-eau">Systeme eau</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/liste-infra">
+                        <i class="fa fa-chart-area mr-1 text-danger"></i>
+                        <span>Infrastructure</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <nav class="navbar navbar-light bg-light shadow-sm p-3 mb-5 rounded">
+                <div class="btn-toggler">
+                    <span class="line little-line"></span>
+                    <span class="line"></span>
+                    <span class="line little-line"></span>
+                </div>
+                {% block recherche %}
+                    <form method="GET" class="row mr-0 ml-0">
+                        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input value="{{ search ? search }}"  name="q" type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                {% endblock %}
+                <div class="dropdown">
+                    <a style="font-weight: bold; font-size: 18px" class="dropdown-toggle name-user" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-1"> {{ session.user.username|capitalize }} </span>
+                        <img src="{{ session.user.avatar }}" class="rounded-circle img-profile"></img>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in text-center mt-4" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/profile">
+                            <i class="fa fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a class="dropdown-item" href="/profile-setting">
+                            <i class="fa fa-cogs"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a data-toggle="modal" data-target="#deconnexion" class="dropdown-item border-top" href="#">
+                            <i class="fa fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="footer">
+                {% block footer %}
+                <div class="card border-0 text-center mx-auto bg-light pt-3">
+                    <p>
+                        &copy; Copyright <script>document.write(new Date().getFullYear())</script><a href="https://web.facebook.com/profile.php?id=100008916221964&ref_component=mbasic_home_header&ref_page=%2Fwap%2Fhome.php&refid=8"> G-infra</a> 
+                        . All Rights Reserved
+                    </p>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deconnexion" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="deconnexionLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deconnexionLabel">Deconnexion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <p>Voulez-vous vraiment deconnecter?</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="/logout">Ok</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/jquery-3.4.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/fontawesome/js/all.min.js"></script>
+        <script src="/js/app.js"></script>
+
+    </body>
+</html>

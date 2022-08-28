@@ -1,0 +1,165 @@
+{% extends "base.html.twig" %}
+
+{% block style %}<link rel="stylesheet" href="/css/chart.css">{% endblock %}
+
+{% block title %}Chart{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block recherche %}
+    <form class="row mr-0 ml-0">
+        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+<div>
+  <form method="get" class="row mx-auto">
+    <select name="year" class="col-4 col-sm-3 col-md-2 custom-select">
+      {% for data in year %}
+        <option value="{{ data.year_date_reception }}" {{ annee.year == data.year_date_reception ? 'selected' }}> {{ data.year_date_reception }} </option>
+      {% endfor %}
+    </select>
+    <button class="col-sm-0 btn btn-success search" type="submit"><i class="fa fa-check"></i></button>
+  </form>
+  <div class="row my-3  text-center mx-auto">
+    <div class="col-lg-4 col-md-6">
+      <div class="card border-0 shadow bg-white rounded">
+        <div class="card-header">
+          <span>NOMBRE INFRASTRUCTURE</span>
+        </div>
+        <div class="card-body">
+          <canvas id="chartInfra"></canvas>
+        </div>
+        <div class="card-footer">
+          <span class="h2">Total: {{donnee.nombre_infra.nombre_infra}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card border-0 shadow bg-white rounded">
+        <div class="card-header">
+          <span>NOMBRE PDO</span>
+        </div>
+        <div class="card-body">
+          <canvas id="chartPdo"></canvas>
+        </div>
+        <div class="card-footer">
+          <span class="h2">Total: {{donnee.nombre_pdo.nombre_pdo}}</span>
+        </div>
+      </div>
+    </div>
+
+    {% if annee.taux_dessert.taux_dessert %}
+      <div class="col-lg-4 col-md-12">
+        <div class="card border-0 shadow bg-white rounded">
+          <div class="card-header row mr-0 ml-0">
+            <span class="col text-center">TAUX DE DESSERT</span>
+          </div>
+          <div class="card-body">
+            <canvas id="chartTaux"></canvas>
+          </div>
+            <div class="card-footer">
+                <span class="h2">Total: {{ annee.taux_dessert.taux_dessert }}</span>
+            </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="card col-11 mx-auto px-0">
+    <div class="text-center h3 card-header">
+      Graphe Annuel
+    </div>
+    <canvas class="card-body" id="myChart"></canvas>
+  <div>
+</div>
+
+
+<script>
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(
+        ctx, {
+            type: 'bar',
+            data:{
+                labels: [{{ donnee.nom_district |raw }}],
+                datasets: [
+                    {
+                      data:[{{ donnee.taux_district |raw }}],
+                      backgroundColor:'#1cc88a',
+                    }
+                ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+            }
+        }
+    );
+
+    const ctx1 = document.getElementById("chartInfra");
+    const chartInfra = new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+      labels: ["Fonctionnel", "Non Fonctionnel"],
+      datasets: [{
+        data: [{{ donnee.infra_fonctionnel.fonctionnel  }}, {{ donnee.infra_non_fonctionnel.non_fonctionnel }}],
+        backgroundColor: ['#1cc88a', '#e74a3b']
+      }],
+    },
+    options: {
+      legend: {
+      display: false
+    },
+    cutoutPercentage: 70
+  }
+  });
+
+  const ctx2 = document.getElementById("chartPdo");
+    const chartPdo = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ["Fonctionnel", "Non Fonctionnel"],
+      datasets: [{
+        data: [{{donnee.pdo_fonctionnel.fonctionnel}}, {{donnee.pdo_non_fonctionnel.non_fonctionnel}}],
+        backgroundColor: ['#1cc88a', '#e74a3b']
+      }],
+    },
+    options: {
+      legend: {
+      display: false
+    },
+    cutoutPercentage: 70
+  }
+  });
+
+  const ctx3 = document.getElementById("chartTaux");
+    const chartTaux = new Chart(ctx3, {
+    type: 'doughnut',
+    data: {
+      labels: [{{ annee.nom_district |raw }}],
+      datasets: [{
+        data: [{{ annee.taux_district |raw }}],
+        backgroundColor: ['#1cc88a', '#e74a3b','#9c27b0', '#e91e63', '#2196f3', '#cddc39', '#795548']
+      }],
+    },
+    options: {
+    legend: {
+      display: false
+    },
+    cutoutPercentage: 70
+  }
+  });
+
+</script>
+
+{% endblock %}

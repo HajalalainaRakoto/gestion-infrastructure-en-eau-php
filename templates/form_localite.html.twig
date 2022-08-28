@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion Localite{% endblock %}
+
+{% block recherche %}
+  <form class="row mr-0 ml-0">
+      <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+          <div class="input-group-prepend">
+              <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+          </div>
+          <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+      </div>
+  </form>
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-3 m-5 bg-white rounded border-light">
+  <h5 class="card-title text-center">Gestion Localite</h5>
+  <div class="card-body">
+
+    <form method="post" action="">
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="district">District</label>
+          <input type="text" class="form-control {{ errors.district ? 'is-invalid' }}" id="district" name="district" value="{{ localite.district }}" required>
+          <div class="{{ errors.district ? 'invalid-feedback'}}">
+            {{errors.district[0]}}
+          </div>
+        </div>
+        <div class="col">
+          <label for="commune">Commune</label>
+          <input type="text" class="form-control {{ errors.commune ? 'is-invalid' }}" id="commune" name="commune" value="{{ localite.commune }}" required>
+          <div class="{{ errors.commune ? 'invalid-feedback'}}">
+            {{errors.commune[0]}}
+          </div>
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="fokotany">Fokotany</label>
+          <input type="text" class="form-control {{ errors.fokontany ? 'is-invalid' }}" id="fokotany" name="fokontany" value="{{ localite.fokontany }}" required>
+            <div class="{{ errors.fokontany ? 'invalid-feedback'}}">
+            {{errors.fokontany[0]}}
+          </div>
+        </div>
+        <div class="col">
+        <label for="localité">Localité</label>
+          <input type="text" class="form-control {{ errors.localite ? 'is-invalid' }}" id="localité" name="localite" value="{{ localite.localite }}" required>
+          <div class="{{ errors.localite ? 'invalid-feedback'}}">
+            {{errors.localite[0]}}
+          </div>
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="nombreMénageLocalité">Nombre Ménage Localité</label>
+          <input type="number" class="form-control {{ errors.nb_menage_localite ? 'is-invalid' }}" id="nombreMénageLocalité" name="nb_menage_localite" value="{{ localite.nb_menage_localite }}" required>
+          <div class="{{ errors.nb_menage_localite ? 'invalid-feedback'}}">
+            {{errors.nb_menage_localite[0]}}
+          </div>
+        </div>
+        <div class="col">
+        <label for="nombrePopulationLocalité">Nombre Population Localité</label>
+          <input type="number" class="form-control {{ errors.nb_population_localite ? 'is-invalid' }}" id="nombrePopulationLocalité" name="nb_population_localite" value="{{ localite.nb_population_localite }}" required>
+          <div class="{{ errors.nb_population_localite ? 'invalid-feedback'}}">
+            {{errors.nb_population_localite[0]}}
+          </div>
+        </div>
+      </div>
+
+        <div class="form-row my-2">
+          <label for="dateReception">Date De Réception</label>
+          <input type="date" class="form-control {{ errors.date_reception ? 'is-invalid' }}" id="dateReception" name="date_reception" value="{{ localite.date_reception }}" required>
+          <div class="{{ errors.date_reception ? 'invalid-feedback'}}">
+            {{errors.date_reception[0]}}
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

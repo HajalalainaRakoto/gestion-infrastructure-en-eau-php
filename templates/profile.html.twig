@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block recherche %}
+    <form class="row mr-0 ml-0">
+        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+<div class="card col-md-5 mx-auto px-0">
+    <img class="card-img-top img-thumbnail img-fluid" alt="avatar" src=" {{ session.user.avatar }} "></img>
+    <div class="card-body text-center font-weight-bold">
+        {{ session.user.username | capitalize }}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+.card-header {
+    background-color:#2979ff;
+    font-weight: 400;
+}
+
+.search{
+    max-width: max-content!important;
+    min-width: 30px!important;
+}

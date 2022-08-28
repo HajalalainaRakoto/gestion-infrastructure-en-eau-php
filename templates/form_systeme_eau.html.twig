@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion Systeme Eau{% endblock %}
+
+{% block recherche %}
+    <form class="row mr-0 ml-0">
+        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-3 m-5 bg-white rounded border-light">
+  <h5 class="card-title text-center">Gestion Systeme Eau</h5>
+  <div class="card-body">
+    <form method="post" action="">
+      <div class="form-row">
+        <label for="id_loc">ID Localité</label>
+        <select class="custom-select {{ errors.id_loc ? 'is-invalid' }}" id="id_loc" name="id_loc" required>
+            {% for type in id_loc %}
+              <option {{ systeme_eau.id_loc == type.id_loc ? 'selected' }}>{{ type.id_loc }}</option>
+            {% endfor %}
+        </select>
+        <div class="{{ errors.id_loc ? 'invalid-feedback'}}">
+          {{errors.id_loc[0]}}
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="typeInfrastructure">Type Infrastructure</label>
+            <select class="custom-select {{ errors.type_infra ? 'is-invalid' }}" id="typeInfrastructure" name="type_infra"  required>
+              {% for type in types_infra %}
+                <option {{ systeme_eau.type_infra == type.type_infra ? 'selected' }}>{{ type.type_infra }}</option>
+              {% endfor %}
+            </select>
+          <div class="{{ errors.type_infra ? 'invalid-feedback'}}">
+            {{errors.type_infra[0]}}
+          </div>
+        </div>
+        <div class="col">
+          <div>Fonctionnalité</div>
+          {% if systeme_eau.fonctionnalite %}
+            <div class="custom-control custom-radio">
+              <input type="radio" id="fonctionnel" name="fonctionnalite" class="custom-control-input" value="FONCTIONNEL" {{ systeme_eau.fonctionnalite == 'FONCTIONNEL' ? 'checked' }}>
+              <label class="custom-control-label" for="fonctionnel">Fonctionnel</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="nonFonctionnel" name="fonctionnalite" class="custom-control-input" value="NON FONCTIONNEL" {{ systeme_eau.fonctionnalite == 'NON FONCTIONNEL' ? 'checked' }}>
+              <label class="custom-control-label" for="nonFonctionnel">Non Fonctionnel</label>
+            </div>
+          {% else %}
+            <div class="custom-control custom-radio">
+              <input type="radio" id="fonctionnel" name="fonctionnalite" class="custom-control-input" value="FONCTIONNEL">
+              <label class="custom-control-label" for="fonctionnel">Fonctionnel</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="nonFonctionnel" name="fonctionnalite" class="custom-control-input" value="NON FONCTIONNEL" checked>
+              <label class="custom-control-label" for="nonFonctionnel">Non Fonctionnel</label>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

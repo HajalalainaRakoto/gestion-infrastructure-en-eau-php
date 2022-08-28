@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste Localite{% endblock %}
+{% block style %}
+  <link rel="stylesheet" href="/css/liste_pdo_style.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-2 m-2 bg-white rounded border-light">
+  <h1 class="card-title text-center mb-5">Liste Localite</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID Localité</th>
+          <th scope="col">District</th>
+          <th scope="col">Commune</th>
+          <th scope="col">Fokontany</th>
+          <th scope="col">Localité</th>
+          <th scope="col">Ménage Localité</th>
+          <th scope="col">Population Localité</th>
+          <th scope="col">Date De Récéption</th>
+          <th scope="col"><a class="h5" href="/form-localite"><i class="fa fa-plus"></a></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for donnee in data %}
+              <tr>
+                  <td>{{donnee.id_loc}}</td>
+                  <td>{{donnee.district}}</td>
+                  <td>{{donnee.commune}}</td>
+                  <td>{{donnee.fokontany}}</td>
+                  <td>{{donnee.localite}}</td>
+                  <td>{{donnee.nb_menage_localite}}</td>
+                  <td>{{donnee.nb_population_localite}}</td>
+                  <td>{{donnee.format_date_reception}}</td>
+                  <td class="action">
+                    <a href="/form-localite?id_loc={{ donnee.id_loc }}" class="mr-1" style="color:#1cc88a"><i class="fa fa-edit"></i></a>
+                    <span class="ml-1" onclick="let c = confirm('Voulez-vous vraiment supprimer?'); if(!c) return false;">
+                      <a style="color:#d50000" href="/delete-localite?id_loc={{ donnee.id_loc }}">
+                        <i class="fa fa-trash-alt"></i>
+                      </a>
+                    </span>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    <nav class="row mx-auto" aria-label="Page navigation example">
+      {% if all == 0 %}
+        <div class="col text-center">
+          AUCUN RESULTAT CORRESPONDANT
+        </div>
+      {% else %}
+      <p class="col">Showing {{ start + 1 }} to {{ end + start }} of {{ all }} entries</p>
+      <ul class="col pagination">
+        <li class="page-item {{ page <= 1 ? 'disabled' }}" ><a class="page-link" href="/liste-localite?q={{ search }}&p={{ page - 1 }}">Previous</a></li>
+        {% for i in 1..nb %}
+            <li class="page-item {{ page == i ? 'active' }}"><a class="page-link" href="/liste-localite?q={{ search }}&p={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+        <li class="page-item {{ page >= nb ? 'disabled' }}"><a class="page-link" href="/liste-localite?q={{ search }}&p={{ page + 1 }}">Next</a></li>
+      </ul>
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
+{% endblock %}

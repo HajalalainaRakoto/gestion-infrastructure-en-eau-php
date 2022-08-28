@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profile Setting{% endblock %}
+
+{% block recherche %}
+    <form class="row mr-0 ml-0">
+        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+<div class="card col-md-5 px-0 mx-auto">
+  <div class="card-header text-center font-weight-bold h3">Setting</div>
+  <div class="card-body">
+        <div class="mb-1">
+            <h5 class="card-title">Username</h5>
+            <a data-toggle="collapse" href="#collapseUsername" aria-expanded="false" aria-controls="collapseUsername">
+                Change username
+            </a>
+            <div class="collapse" id="collapseUsername">
+                <div class="card card-body">
+                    <form method="post" action="">
+                        <label for="username">New Username</label>
+                        <input id="username" name="username" class="form-control mb-2 {{ error.username ? 'is-invalid'}}" type="text" value="{{ session.user.username | capitalize }}"required></input>
+                        <div class="{{ error.username ? 'invalid-feedback'}}">
+                            {{error.username[0]}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="mb-1">
+            <h5 class="card-title">Password</h5>
+            {% if validPass %}
+                <div class="alert alert-success text-center"> {{validPass}} </div>
+            {% endif %}
+            <a data-toggle="collapse" href="#collapsePwd" aria-expanded="false" aria-controls="collapsePwd">
+                Change password
+            </a>
+            <div class="collapse" id="collapsePwd">
+                <div class="card card-body">
+                    <form method="post" action="">
+                        <label for="password">Password</label>
+                        <input id="password" name="old_password" class="form-control mb-2 {{ errorPass ? 'is-invalid'}}" type="password" required></input>
+                        <div class="{{ errorPass ? 'invalid-feedback'}}">
+                            {{errorPass}}
+                        </div>
+
+                        <label for="newPassword">New Password</label>
+                        <input id="newPassword" name="new_password" class="form-control mb-2 {{ error.new_password ? 'is-invalid'}}" type="password" required></input>
+                        <div class="{{ error.new_password ? 'invalid-feedback'}}">
+                            {{error.new_password[0]}}
+                        </div>
+
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input id="confirmPassword" name="confirm_password" class="form-control mb-2 {{ error.confirm_password ? 'is-invalid'}}" type="password" required></input>
+                        <div class="{{ error.confirm_password ? 'invalid-feedback'}}">
+                            {{error.confirm_password[0]}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="mb-1">
+            <h5 class="card-title">Avatar</h5>
+            {% if errorFile %}
+                <div class="alert alert-danger text-center"> {{errorFile}} </div>
+            {% endif %}
+            <a data-toggle="collapse" href="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
+                Change avatar
+            </a>
+            <div class="collapse" id="collapseAvatar">
+                <div class="card card-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <div>
+                            <label for="avatar">New Avatar</label>
+                            <input id="avatar" name="avatar" type="file" required></input>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+  </div>
+  <div class="card-footer text-center">
+    <a class="text-danger" href="#" data-toggle="modal" data-target="#deleteProfile">Delete Profile</a>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteProfile" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="deleteProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteProfileLabel">Delete Profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <p>Voulez-vous vraiment supprimer votre compte?</p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" href="/delete-profile">Ok</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

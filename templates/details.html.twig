@@ -1,0 +1,178 @@
+{% extends "base.html.twig" %}
+
+{% block style %}
+  <link rel="stylesheet" href="/css/details.css">
+{% endblock %}
+
+{% block title %}Details{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-5 m-2 bg-white rounded border-light">
+    <div class="card-title font-weight-bold text-center">
+        <h1>Infrastructure {{ donnee.loc.id_loc }} </h1>
+    </div>
+    <div class="card-title">
+        <h3>Localite :</h3>
+    </div>
+<div class="row my-2 mb-3">
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>District</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.district }}</span>
+        </div>
+    </div>
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Commune</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.commune }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Fokontany</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.fokontany }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Localite</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.localite }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 mb-3">
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Menage Localite</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.nb_menage_localite }}</span>
+        </div>
+    </div>
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Population Localite</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.nb_population_localite }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Date Reception</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.loc.date_reception }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="card-title">
+        <h3>Point Eau :</h3>
+    </div>
+
+<div class="row my-2 mb-3">
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Type PDO</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.type_pdo }}</span>
+        </div>
+    </div>
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Localite Reservoir</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.localite_reservoir }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Etat Ouvrage</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.etat_ouvrage }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Ménage Bénéficiaire</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.nb_menage_beneficiaire }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 mb-3">
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Population Bénéficiaire</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.nb_population_beneficiaire }}</span>
+        </div>
+    </div>
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Mode Gestion</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.mode_gestion }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Nom Gestionnaire</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.nom_gestionnaire }}</span>
+        </div>
+    </div>
+<div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Tarification</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.pdo.tarification }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="card-title">
+        <h3>Système Eau :</h3>
+    </div>
+
+<div class="row my-2 mb-3">
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Type Infrastructure</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.sys.type_infra }}</span>
+        </div>
+    </div>
+    <div class="col mx-2 py-4 card border-0 shadow-sm bg-white text-center rounded">
+        <div class="card-title text-muted">
+            <h5>Fonctionnalité</h5>
+        </div>
+        <div>
+            <span class="h6">{{ donnee.sys.fonctionnalite }}</span>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

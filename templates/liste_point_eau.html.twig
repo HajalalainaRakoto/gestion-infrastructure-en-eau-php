@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste Point Eau{% endblock %}
+{% block style %}
+  <link rel="stylesheet" href="/css/liste_pdo_style.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-2 m-2 bg-white rounded border-light">
+  <h1 class="card-title text-center mb-5">Liste Point Eau</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID localité</th>
+          <th scope="col">Type PDO</th>
+          <th scope="col">Localité Du Réservoir</th>
+          <th scope="col">Etat Ouvrage</th>
+          <th scope="col">Ménage Bénéficiaire</th>
+          <th scope="col">Population Bénéficiaire</th>
+          <th scope="col">Mode De Gestion</th>
+          <th scope="col">Nom Du Gestionnaire</th>
+          <th scope="col">Tarification</th>
+          <th scope="col"><a class="h5" href="/form-point-eau"><i class="fa fa-plus"></a></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for donnee in data %}
+              <tr>
+                <td>{{donnee.id_loc}}</td>
+                <td>{{donnee.type_pdo}}</td>
+                <td>{{donnee.localite_reservoir}}</td>
+                <td>{{donnee.etat_ouvrage}}</td>
+                <td>{{donnee.nb_menage_beneficiaire}}</td>
+                <td>{{donnee.nb_population_beneficiaire}}</td>
+                <td>{{donnee.mode_gestion}}</td>
+                <td>{{donnee.nom_gestionnaire}}</td>
+                <td>{{donnee.tarification}}</td>
+                <td class="action">
+                  <a href="/form-point-eau?id_pdo={{ donnee.id_pdo }}" class="mr-1" style="color:#1cc88a"><i class="fa fa-edit"></i></a>
+                  <span class="ml-1" onclick="let c = confirm('Voulez-vous vraiment supprimer?'); if(!c) return false;">
+                    <a style="color:#d50000" href="/delete-point-eau?id_pdo={{ donnee.id_pdo }}">
+                      <i class="fa fa-trash-alt"></i>
+                    </a>
+                  </span>
+                </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    <nav class="row mx-auto" aria-label="Page navigation example">
+      {% if all == 0 %}
+        <div class="col text-center">
+          AUCUN RESULTAT CORRESPONDANT
+        </div>
+      {% else %}
+      <p class="col">Showing {{ start + 1 }} to {{ end + start }} of {{ all }} entries</p>
+      <ul class="col pagination">
+        <li class="page-item {{ page <= 1 ? 'disabled' }}" ><a class="page-link" href="/liste-point-eau?q={{ search }}&p={{ page - 1 }}">Previous</a></li>
+        {% for i in 1..nb %}
+        <li class="page-item {{ page == i ? 'active' }}"><a class="page-link" href="/liste-point-eau?q={{ search }}&p={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+        <li class="page-item {{ page >= nb ? 'disabled' }}"><a class="page-link" href="/liste-point-eau?q={{ search }}&p={{ page + 1 }}">Next</a></li>
+      </ul>
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
+{% endblock %}

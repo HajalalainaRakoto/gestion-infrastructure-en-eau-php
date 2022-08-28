@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion Point Eau{% endblock %}
+
+{% block recherche %}
+    <form class="row mr-0 ml-0">
+        <div class="input-group form-inline rounded-pill p-2 shadow-sm col">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded-pill" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="search" placeholder="Search" aria-label="Search" class="form-control form-control-lg rounded-pill" aria-describedby="basic-addon1">
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-3 m-5 bg-white rounded border-light">
+  <h5 class="card-title text-center">Gestion Point Eau</h5>
+  <div class="card-body">
+    <form method="post" action="">
+      <div class="form-row">
+        <label for="id_loc">ID Localité</label>
+        <select class="custom-select {{ errors.id_loc ? 'is-invalid' }}" id="id_loc" name="id_loc" required>
+            {% for type in id_loc %}
+              <option {{ pdo.id_loc == type.id_loc ? 'selected' }}>{{ type.id_loc }}</option>
+            {% endfor %}
+        </select>
+        <div class="{{ errors.id_loc ? 'invalid-feedback'}}">
+          {{errors.id_loc[0]}}
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="localitéReservoir">Localité Réservoir</label>
+          <input type="text" class="form-control {{ errors.localite_reservoir ? 'is-invalid' }}" id="localitéReservoir" name="localite_reservoir" value="{{ pdo.localite_reservoir }}" required>
+          <div class="{{ errors.localite_reservoir ? 'invalid-feedback'}}">
+            {{errors.localite_reservoir[0]}}
+          </div>
+        </div>
+        <div class="col">
+          <div>Etat Ouvrage</div>
+          {% if pdo.etat_ouvrage %}
+            <div class="custom-control custom-radio">
+              <input type="radio" id="fonctionnel" name="etat_ouvrage" class="custom-control-input" value="FONCTIONNEL" {{ pdo.etat_ouvrage == 'FONCTIONNEL' ? 'checked' }}>
+              <label class="custom-control-label" for="fonctionnel">Fonctionnel</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="nonFonctionnel" name="etat_ouvrage" class="custom-control-input" value="NON FONCTIONNEL" {{ pdo.etat_ouvrage == 'NON FONCTIONNEL' ? 'checked' }}>
+              <label class="custom-control-label" for="nonFonctionnel">Non Fonctionnel</label>
+            </div>
+          {% else %}
+            <div class="custom-control custom-radio">
+              <input type="radio" id="fonctionnel" name="etat_ouvrage" class="custom-control-input" value="FONCTIONNEL">
+              <label class="custom-control-label" for="fonctionnel">Fonctionnel</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="nonFonctionnel" name="etat_ouvrage" class="custom-control-input" value="NON FONCTIONNEL" checked>
+              <label class="custom-control-label" for="nonFonctionnel">Non Fonctionnel</label>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="nombreMenageBeneficiaire">Nombre Ménage Bénéficiaire</label>
+          <input type="number" class="form-control {{ errors.nb_menage_beneficiaire ? 'is-invalid' }}" id="nombreMenageBeneficiaire" name="nb_menage_beneficiaire" value="{{ pdo.nb_menage_beneficiaire }}" required>
+          <div class="{{ errors.nb_menage_beneficiaire ? 'invalid-feedback'}}">
+            {{errors.nb_menage_beneficiaire[0]}}
+          </div>
+        </div>
+        <div class="col">
+        <label for="nombrePopulationBeneficiaire">Nombre Population Bénéficiaire</label>
+          <input type="number" class="form-control {{ errors.nb_population_beneficiaire ? 'is-invalid' }}" id="nombrePopulationBeneficiaire" name="nb_population_beneficiaire" value="{{ pdo.nb_population_beneficiaire }}" required>
+          <div class="{{ errors.nb_population_beneficiaire ? 'invalid-feedback'}}">
+            {{errors.nb_population_beneficiaire[0]}}
+          </div>
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col">
+          <label for="modeGestion">Mode De Gestion</label>
+          <input type="text" class="form-control {{ errors.mode_gestion ? 'is-invalid' }}" id="modeGestion" name="mode_gestion" value="{{ pdo.mode_gestion }}" required>
+          <div class="{{ errors.mode_gestion ? 'invalid-feedback'}}">
+            {{errors.mode_gestion[0]}}
+          </div>
+        </div>
+        <div class="col">
+          <label for="nomGestionnaire">Nom Du Gestionnaire</label>
+          <input type="text" class="form-control {{ errors.nom_gestionnaire ? 'is-invalid' }}" id="nomGestionnaire" name="nom_gestionnaire" value="{{ pdo.nom_gestionnaire }}" required>
+          <div class="{{ errors.nom_gestionnaire ? 'invalid-feedback'}}">
+            {{errors.nom_gestionnaire[0]}}
+          </div>
+        </div>
+      </div>
+      <div class="form-row mt-2 mb-4">
+        <div class="col">
+          <label for="tarification">Tarification</label>
+          <input type="text" class="form-control {{ errors.tarification ? 'is-invalid' }}" id="tarification" name="tarification" value="{{ pdo.tarification }}" required>
+          <div class="{{ errors.tarification ? 'invalid-feedback'}}">
+            {{errors.tarification[0]}}
+          </div>
+        </div>
+        <div class="col">
+          <label for="typePdo">Type Pdo</label>
+          <select class="custom-select {{ errors.type_pdo ? 'is-invalid' }}" id="typePdo" name="type_pdo" required>
+              {% for type in types_pdo %}
+                <option {{ pdo.type_pdo == type.type_pdo ? 'selected' }}>{{ type.type_pdo }}</option>
+              {% endfor %}
+          </select>
+          <div class="{{ errors.type_pdo ? 'invalid-feedback'}}">
+            {{errors.type_pdo[0]}}
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

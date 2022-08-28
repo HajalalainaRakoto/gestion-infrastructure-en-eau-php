@@ -1,0 +1,81 @@
+{% extends "user/auth_form.html.twig" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" method="POST" action="">
+                                <div class="form-group">
+                                    <div class="col-sm-12 mb-3 mb-sm-0 mx-auto">
+                                        <input name="username" type="text" class=" {{ errorName ? 'is-invalid' }} {{ errors.username ? 'is-invalid' }} form-control rounded-pill" id="exampleFirstName"
+                                            placeholder="User Name" required>
+                                        <div class="{{ errors.username ? 'invalid-feedback'}}">
+                                            {{errors.username[0]}}
+                                        </div>
+                                        <div class="{{ errorName ? 'invalid-feedback'}}">
+                                            {{errorName}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 mb-3 mb-sm-0 mx-auto">
+                                        <input name="password" type="password" class="{{ errors.password ? 'is-invalid' }} form-control rounded-pill"
+                                            id="exampleInputPassword" placeholder="Password" required>
+                                        <div class="{{ errors.password ? 'invalid-feedback'}}">
+                                            {{errors.password[0]}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 mb-3 mb-sm-0 mx-auto">
+                                        <input name="confirm_password" type="password" class="{{ errors.confirm_password ? 'is-invalid' }} form-control rounded-pill"
+                                            id="exampleRepeatPassword" placeholder="Confirm Password" required>
+                                        <div class="{{ errors.confirm_password ? 'invalid-feedback'}}">
+                                            {{errors.confirm_password[0]}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 mb-3 mb-sm-0 mx-auto">
+                                        <input name="code" type="password" class="{{ errorValidationCode ? 'is-invalid' }} form-control rounded-pill"
+                                            id="code" placeholder="Validation Code" required>
+                                        <div class="{{ errorValidationCode ? 'invalid-feedback'}}">
+                                            {{ errorValidationCode }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block rounded-pill">Register</button>
+                                <hr>
+                                <a href="https://www.gmail.com/" class="btn btn-danger btn-user btn-block rounded-pill">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="https://www.facebook.com/" class="btn btn-primary btn-user btn-block rounded-pill">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="#">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
